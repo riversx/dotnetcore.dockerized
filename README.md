@@ -11,7 +11,7 @@
 |     |__project.json
 |__/test
    |__/AspDotnetCoreProject.Tests
-|     |_ ... (test project files)
+      |_ ... (test project files)
       |__project.json
 ```
 
