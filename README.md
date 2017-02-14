@@ -39,6 +39,11 @@ SUMMARY: Total: 1 targets, Passed: 1, Failed: 0.
 **FINISH!**
 Well done! You are ready to start!
 
+## Run the project 
+```sh
+dotnet run -p src/AspDotnetCoreProject/project.json
+```
+
 ## Build Docker image ##
 ```sh
 dotnet publish src/AspDotnetCoreProject/project.json -c Release -o out
