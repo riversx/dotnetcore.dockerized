@@ -4,52 +4,66 @@
 
 ```sh
 /dotnetcore.dockerized
-|__global.json
+|__dotnetcore.dockerized.sln (solution project)
 |__/src
-|  |__/AspDotnetCoreProject
-|     |_ ... (project files)
-|     |__project.json
+|  |__/project-api
+|     |__ ... (project files)
+|     |__ project-api.csproj
 |__/test
-   |__/AspDotnetCoreProject.Tests
-      |_ ... (test project files)
-      |__project.json
+   |__/project-api.ntest
+      |__ ... (NUnit test project files)
+      |__ project-api.ntest.csproj
+   |__/project-api.xtest
+      |__ ... (XUnit test project files)
+      |__ project-api.xtest.csproj
 ```
 
 ## Build solution and run tests
+
 Build and run the tests
+
 ```sh
-dotnet restore src/AspDotnetCoreProject/project.json
-dotnet build src/AspDotnetCoreProject/project.json
-dotnet restore test/AspDotnetCoreProject.Tests/project.json
-dotnet test test/AspDotnetCoreProject.Tests/project.json
+dotnet build
+dotnet test
+dotnet test test/project-api.xtest/project-api.xtest.csproj
 ```
 
 You should get a red bar
+
 ```sh
-xUnit.net .NET CLI test runner (64-bit osx.10.11-x64)
-  Discovering: AspDotnetCoreProject.Tests
-  Discovered:  AspDotnetCoreProject.Tests
-  Starting:    AspDotnetCoreProject.Tests
-  Finished:    AspDotnetCoreProject.Tests
-=== TEST EXECUTION SUMMARY ===
-   AspDotnetCoreProject.Tests  Total: 1, Errors: 0, Failed: 0, Skipped: 0, Time: 0.167s
-SUMMARY: Total: 1 targets, Passed: 1, Failed: 0.
+Test run for /Users/boris/projects/experiments/dotnetcore.dockerized/test/project-api.ntest/bin/Debug/netcoreapp3.1/project-api.ntest.dll(.NETCoreApp,Version=v3.1)
+Microsoft (R) Test Execution Command Line Tool Version 16.3.0
+Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Starting test execution, please wait...
+
+A total of 1 test files matched the specified pattern.
+
+Test Run Successful.
+Total tests: 5
+     Passed: 5
+ Total time: 0.7602 Seconds
 ```
 
 **FINISH!**
 Well done! You are ready to start!
 
-## Run the project 
+## Run the project
+
 ```sh
-dotnet run -p src/AspDotnetCoreProject/project.json
+dotnet run -p src/project-api/project-api.csproj
 ```
 
-## Build Docker image ##
+## Build Docker image
+
 ```sh
-dotnet publish src/AspDotnetCoreProject/project.json -c Release -o out
-docker build -t aspdotnetcoreproject .
+rm -Rf out
+dotnet publish src/project-api/project-api.csproj -c Release -o out
+docker build -t projectapi .
 ```
-## Run Docker image ##
+
+## Run Docker image
+
 ```sh
-docker run --rm -it -p 80:5000 --name aspnetcoreproject aspnetcoreproject
+docker run --rm -it -p 80:5000 --name projectapi projectapi
 ```

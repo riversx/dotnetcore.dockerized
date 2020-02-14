@@ -1,1 +1,1 @@
-docker build -t aspnetcoreproject .
+docker build -t projectapi .
