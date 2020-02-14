@@ -65,5 +65,5 @@ docker build -t projectapi .
 ## Run Docker image
 
 ```sh
-docker run --rm -it -p 80:5000 --name projectapi projectapi
+... [TODO]
 ```
